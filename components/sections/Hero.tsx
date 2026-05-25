@@ -5,7 +5,6 @@ import {
   useMotionValue,
   useTransform,
   animate,
-  type Variants,
 } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
