@@ -1,0 +1,59 @@
+---
+title: "Plataforma de pagos construida para 10M de transacciones mensuales"
+excerpt: "Rediseñamos desde cero la arquitectura de una startup fintech Serie A que estaba a semanas de colapsar bajo su propio crecimiento."
+client: "Startup fintech (Serie A, confidencial)"
+industry: "Fintech"
+services: ["Desarrollo"]
+date: "2024-09"
+duration: "6 meses"
+featured: true
+results:
+  - metric: "10M+"
+    label: "Transacciones mensuales"
+  - metric: "99.99%"
+    label: "Uptime en producción"
+  - metric: "40%"
+    label: "Reducción en costo de infraestructura"
+---
+
+## El punto de partida
+
+La startup había crecido de 50,000 a 2 millones de usuarios en 14 meses. El equipo original de 4 ingenieros había construido un monolito Django que funcionaba perfectamente a escala pequeña. A 2 millones de usuarios, tardaba 8 segundos en procesar una transacción simple.
+
+Los inversores de Serie A habían puesto $12M sobre la mesa. El CTO estimaba que con la arquitectura actual tenían entre 6 y 10 semanas antes de que el sistema empezara a fallar de forma no recuperable.
+
+Nos llamaron un martes. El lunes siguiente teníamos equipo en sitio.
+
+## La decisión de arquitectura
+
+La tentación en estos casos es siempre la misma: microservicios. Es la respuesta que suena moderna, escalable, correcta. También es la respuesta que mata startups que no tienen el equipo para operarla.
+
+Después de una semana de análisis —código, infraestructura, equipo, roadmap de producto— propusimos un modular monolith en lugar de microservicios. La razón: el equipo de la startup tenía 6 ingenieros. Operar 20 microservicios con 6 ingenieros es una deuda operacional que asfixia la velocidad de producto.
+
+El cliente lo cuestionó. Presentamos los números. Aceptaron.
+
+## Lo que construimos
+
+Diseñamos un sistema en tres módulos desacoplados con contratos bien definidos entre ellos: procesamiento de transacciones, gestión de cuentas y notificaciones/reportes. Cada módulo podía escalar de forma independiente sin necesidad de desacoplarse completamente.
+
+La capa de datos pasó de un PostgreSQL sin índices a una arquitectura con lectura en réplicas, caché en Redis para operaciones frecuentes y particionado por fecha en tablas de alto volumen. El tiempo de procesamiento de transacciones bajó de 8 segundos a 180 milisegundos en el percentil 95.
+
+El CI/CD pasó de deploys manuales cada dos semanas a deploys automatizados múltiples veces por día, con rollback automático y feature flags.
+
+<Callout>
+Eligimos la arquitectura correcta para el equipo que existe, no para el equipo que quisiéramos tener.
+</Callout>
+
+## El proceso
+
+Trabajamos en sprints de dos semanas con el equipo interno. No reemplazamos al equipo: trabajamos junto a ellos, transfiriendo conocimiento en tiempo real. Al final del proyecto, el equipo de la startup podía operar y extender el sistema sin nosotros.
+
+## Los resultados
+
+Seis meses después del inicio, la plataforma procesaba más de 10 millones de transacciones mensuales con 99.99% de uptime. El costo de infraestructura bajó un 40% respecto a la proyección original, porque la arquitectura era más eficiente en uso de recursos.
+
+El equipo de ingeniería pasó de 6 a 14 personas en los 4 meses siguientes, con onboarding en días, no semanas, gracias a la documentación y la arquitectura modular.
+
+## Lo que aprendimos
+
+Las reescrituras totales rara vez son la respuesta correcta. En este caso lo eran, porque el código original no tenía tests, la deuda técnica era estructural y el equipo original ya no estaba. Pero incluso así, la migración fue gradual: módulo por módulo, con ambos sistemas corriendo en paralelo durante 6 semanas antes del cutover final.

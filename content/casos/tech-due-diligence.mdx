@@ -1,0 +1,65 @@
+---
+title: "Due diligence técnica que renegoció $40M en deuda oculta"
+excerpt: "Identificamos riesgos tecnológicos críticos en una adquisición de $120M que el proceso financiero no había detectado, cambiando la estructura del deal."
+client: "Fondo de private equity (confidencial)"
+industry: "Private Equity"
+services: ["Consultoría"]
+date: "2024-11"
+duration: "3 semanas"
+featured: true
+results:
+  - metric: "$40M"
+    label: "Riesgo técnico identificado"
+  - metric: "3 semanas"
+    label: "De contratación a informe ejecutivo"
+  - metric: "18 meses"
+    label: "Plan de remediación priorizado"
+---
+
+## La situación
+
+Un fondo de private equity estaba a tres semanas de cerrar la adquisición de una empresa de software B2B por $120 millones. El proceso de due diligence financiero y legal estaba completo. El equipo de inversión tenía confianza en los números.
+
+Alguien del comité de inversión hizo la pregunta correcta tarde: ¿y el código?
+
+Nos contrataron con una semana de margen antes del cierre. Pedimos más tiempo. Conseguimos tres semanas.
+
+## Lo que encontramos
+
+El sistema principal de la empresa objetivo tenía 11 años. El 60% del código estaba sin tests. Había tres versiones diferentes del mismo módulo de facturación corriendo en producción simultáneamente, con lógica divergente que nadie sabía exactamente cuándo divergió.
+
+La infraestructura estaba en un solo proveedor cloud, sin disaster recovery documentado. El equipo de ingeniería tenía 18 personas; 4 de ellas llevaban más de 7 años y eran las únicas que entendían los módulos más críticos. No había documentación de ninguno de esos módulos.
+
+Las integraciones con los 40 principales clientes estaban construidas sobre una API interna que el equipo había marcado internamente como "deprecated" dos años atrás, pero que seguía siendo el 80% del revenue.
+
+<Callout>
+El riesgo no estaba en el código malo. Estaba en la concentración de conocimiento en personas específicas y en la dependencia de una API que nadie quería mantener pero que todos dependían.
+</Callout>
+
+## El proceso de evaluación
+
+Usamos un protocolo de tres capas:
+
+**Capa técnica:** Análisis estático del código (cobertura, complejidad ciclomática, deuda técnica cuantificada), revisión de arquitectura, auditoría de seguridad básica, evaluación de infraestructura y planes de continuidad.
+
+**Capa de equipo:** Entrevistas estructuradas con los 8 ingenieros clave para mapear concentración de conocimiento, rotación histórica y cultura de ingeniería. Esta capa es la que la mayoría de los procesos de due diligence técnica omiten.
+
+**Capa de negocio:** Cruce entre la deuda técnica identificada y el roadmap de producto comprometido con los clientes. ¿Qué features prometidas no se pueden entregar con la arquitectura actual sin reescribir módulos críticos?
+
+## Las recomendaciones
+
+Entregamos un informe de 47 páginas con dos secciones: ejecutiva (8 páginas, para el comité de inversión) y técnica (39 páginas, para el equipo que operaría la empresa post-adquisición).
+
+La sección ejecutiva quantificaba el riesgo en dólares: $40M en costo estimado de remediación en los primeros 18 meses para llevar el sistema a estándares mínimos de operabilidad segura. Eso no incluía el riesgo de rotación del equipo clave.
+
+La recomendación fue clara: el deal podía cerrarse, pero no a $120M con la estructura propuesta.
+
+## El resultado
+
+El fondo renegoció el precio de adquisición y estructuró $15M del pago como earnout condicionado al cumplimiento de hitos técnicos específicos del plan de remediación que entregamos. La empresa objetivo aceptó.
+
+Tres meses después del cierre, el fondo nos contrató para ejecutar la primera fase del plan de remediación.
+
+## Lo que aprendimos
+
+El due diligence técnico tiene mala reputación porque la mayoría de las veces se hace mal: un consultor pasa dos días mirando el código y entrega un reporte de semáforos sin contexto de negocio. El valor real está en conectar lo que ves en el código con lo que significa para el P&L del próximo propietario. Eso requiere entender tanto de tecnología como de operaciones de negocio.

@@ -1,0 +1,61 @@
+---
+title: "De 4 horas a 8 minutos en revisión legal de contratos"
+excerpt: "Automatizamos la revisión inicial de contratos para una firma de 200 abogados, reduciendo el tiempo de análisis un 97% sin sacrificar precisión legal."
+client: "Firma legal (confidencial)"
+industry: "Legal & Compliance"
+services: ["IA Aplicada"]
+date: "2024-03"
+duration: "12 semanas"
+featured: true
+results:
+  - metric: "97%"
+    label: "Reducción en tiempo de revisión"
+  - metric: "200+"
+    label: "Contratos procesados al día"
+  - metric: "3 meses"
+    label: "Hasta ROI positivo"
+---
+
+## El contexto
+
+Una firma legal de 200 abogados en Bogotá procesaba entre 40 y 60 contratos diarios. La revisión inicial de cada documento —identificar cláusulas de riesgo, verificar fechas de vencimiento, cruzar datos de partes involucradas— tomaba entre 3 y 5 horas por abogado.
+
+El problema no era la capacidad del equipo. Era que los profesionales más calificados estaban haciendo trabajo que no requería su criterio legal; requería tiempo y atención al detalle. Dos cosas que un sistema bien diseñado puede proveer de forma más consistente.
+
+## El desafío técnico
+
+Los contratos llegaban en múltiples formatos: PDFs escaneados, Word, documentos nativos digitalizados con distintos layouts. Ninguno tenía estructura estandarizada. El sistema necesitaba:
+
+- Extraer texto con alta fidelidad de documentos de calidad variable
+- Identificar tipos de cláusulas sin un esquema predefinido
+- Cruzar información con bases de datos internas de clientes y contraparte
+- Generar un reporte estructurado que un abogado pudiera revisar en minutos, no horas
+- Escalar a 200 documentos diarios con latencia aceptable
+
+La solución obvia —un modelo de lenguaje grande aplicado directamente— no era suficiente. Los LLMs alucinan con datos específicos como fechas, números y nombres propios. Para uso legal, eso no es aceptable.
+
+## La solución
+
+Construimos un pipeline de tres capas:
+
+**Capa 1 — Extracción estructurada.** Un proceso de OCR mejorado con post-procesamiento para normalizar la calidad del texto, seguido de un sistema de segmentación que identifica secciones del contrato (partes, objeto, obligaciones, penalidades, vigencia) con alta precisión.
+
+**Capa 2 — Análisis con IA.** Un modelo fine-tuneado sobre contratos colombianos e internacionales, combinado con un sistema RAG que consulta en tiempo real la base de jurisprudencia y contratos históricos de la firma. Esto permite comparar cláusulas contra patrones conocidos de riesgo.
+
+**Capa 3 — Reporte accionable.** Un generador de resúmenes estructurados que produce un documento de una página con semáforo de riesgo por cláusula, alertas automáticas y preguntas sugeridas para la revisión humana.
+
+Los abogados no fueron reemplazados. Fueron liberados: su trabajo pasó de leer y resumir a revisar, cuestionar y decidir.
+
+## Los resultados
+
+El tiempo promedio de revisión inicial bajó de 4 horas a 8 minutos. La firma pasó de procesar 40-60 contratos diarios a más de 200, con el mismo equipo. La tasa de errores en identificación de cláusulas críticas bajó del 12% (humano bajo presión) al 1.3% (sistema + revisión humana).
+
+El ROI fue positivo en el tercer mes de operación.
+
+<Callout>
+El mayor aprendizaje: el valor de la IA en entornos regulados no está en reemplazar el juicio humano, sino en elevar la calidad del input que recibe ese juicio.
+</Callout>
+
+## Lo que aprendimos
+
+Los proyectos de IA en entornos legales fallan casi siempre por la misma razón: se optimiza la precisión del modelo antes de entender qué decisiones toma el humano con su output. Nosotros invirtimos las primeras tres semanas del proyecto en sombras de trabajo —acompañar a los abogados en su proceso real— antes de escribir una línea de código de IA. Eso fue la diferencia.
