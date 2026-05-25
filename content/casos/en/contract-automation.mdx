@@ -1,0 +1,61 @@
+---
+title: "From 4 hours to 8 minutes in legal contract review"
+excerpt: "We automated the initial contract review for a 200-lawyer firm, reducing analysis time by 97% without sacrificing legal accuracy."
+client: "Law firm (confidential)"
+industry: "Legal & Compliance"
+services: ["Applied AI"]
+date: "2024-03"
+duration: "12 weeks"
+featured: true
+results:
+  - metric: "97%"
+    label: "Reduction in review time"
+  - metric: "200+"
+    label: "Contracts processed per day"
+  - metric: "3 months"
+    label: "Time to positive ROI"
+---
+
+## The context
+
+A 200-lawyer firm in Bogotá was processing between 40 and 60 contracts daily. The initial review of each document — identifying risk clauses, verifying expiration dates, cross-referencing data on involved parties — took between 3 and 5 hours per lawyer.
+
+The problem wasn't the team's capacity. It was that the most qualified professionals were doing work that didn't require their legal judgment; it required time and attention to detail. Two things a well-designed system can provide more consistently.
+
+## The technical challenge
+
+Contracts arrived in multiple formats: scanned PDFs, Word documents, natively digitized documents with different layouts. None had a standardized structure. The system needed to:
+
+- Extract text with high fidelity from variable-quality documents
+- Identify clause types without a predefined schema
+- Cross-reference information with internal client and counterparty databases
+- Generate a structured report that a lawyer could review in minutes, not hours
+- Scale to 200 documents per day with acceptable latency
+
+The obvious solution — applying a large language model directly — wasn't enough. LLMs hallucinate on specific data like dates, numbers, and proper names. For legal use, that's not acceptable.
+
+## The solution
+
+We built a three-layer pipeline:
+
+**Layer 1 — Structured extraction.** An OCR process enhanced with post-processing to normalize text quality, followed by a segmentation system that identifies contract sections (parties, subject matter, obligations, penalties, term) with high precision.
+
+**Layer 2 — AI analysis.** A fine-tuned model on Colombian and international contracts, combined with a RAG system that queries in real time the firm's jurisprudence and historical contract database. This allows comparing clauses against known risk patterns.
+
+**Layer 3 — Actionable report.** A structured summary generator that produces a one-page document with a traffic-light risk indicator per clause, automatic alerts, and suggested questions for human review.
+
+Lawyers weren't replaced. They were freed: their work shifted from reading and summarizing to reviewing, questioning, and deciding.
+
+## The results
+
+Average initial review time dropped from 4 hours to 8 minutes. The firm went from processing 40-60 contracts daily to over 200, with the same team. The error rate in identifying critical clauses dropped from 12% (human under pressure) to 1.3% (system + human review).
+
+ROI turned positive in the third month of operation.
+
+<Callout>
+The key insight: the value of AI in regulated environments isn't in replacing human judgment, but in elevating the quality of the input that judgment receives.
+</Callout>
+
+## What we learned
+
+AI projects in legal environments fail almost always for the same reason: the model's accuracy is optimized before understanding what decisions the human makes with its output. We spent the first three weeks of the project job-shadowing — accompanying lawyers in their real workflow — before writing a single line of AI code. That made the difference.

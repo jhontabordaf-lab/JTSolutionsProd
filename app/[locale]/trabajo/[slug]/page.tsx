@@ -35,7 +35,7 @@ export default async function CasePage({ params: { locale, slug } }: PageProps) 
 
   let caso;
   try {
-    caso = getCaseBySlug(slug);
+    caso = getCaseBySlug(slug, locale);
   } catch {
     notFound();
   }

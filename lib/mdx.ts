@@ -22,6 +22,13 @@ export interface CaseStudy {
   content: string;
 }
 
+function getFilePath(slug: string, locale = "es"): string {
+  const localePath = path.join(casosDir, locale, `${slug}.mdx`);
+  if (fs.existsSync(localePath)) return localePath;
+  // Fallback to Spanish
+  return path.join(casosDir, `${slug}.mdx`);
+}
+
 export function getCaseSlugs(): string[] {
   return fs
     .readdirSync(casosDir)
@@ -29,19 +36,15 @@ export function getCaseSlugs(): string[] {
     .map((f) => f.replace(/\.mdx$/, ""));
 }
 
-export function getCaseBySlug(slug: string): CaseStudy {
-  const filePath = path.join(casosDir, `${slug}.mdx`);
+export function getCaseBySlug(slug: string, locale = "es"): CaseStudy {
+  const filePath = getFilePath(slug, locale);
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
-  return {
-    slug,
-    frontmatter: data as CaseFrontmatter,
-    content,
-  };
+  return { slug, frontmatter: data as CaseFrontmatter, content };
 }
 
-export function getAllCases(): CaseStudy[] {
+export function getAllCases(locale = "es"): CaseStudy[] {
   return getCaseSlugs()
-    .map((slug) => getCaseBySlug(slug))
+    .map((slug) => getCaseBySlug(slug, locale))
     .sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
 }

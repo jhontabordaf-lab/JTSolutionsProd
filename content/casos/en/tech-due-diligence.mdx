@@ -1,0 +1,65 @@
+---
+title: "Technical due diligence that renegotiated $40M in hidden debt"
+excerpt: "We identified critical technology risks in a $120M acquisition that the financial process had not detected, changing the structure of the deal."
+client: "Private equity fund (confidential)"
+industry: "Private Equity"
+services: ["Consulting"]
+date: "2024-11"
+duration: "3 weeks"
+featured: true
+results:
+  - metric: "$40M"
+    label: "Technical risk identified"
+  - metric: "3 weeks"
+    label: "From engagement to executive report"
+  - metric: "18 months"
+    label: "Prioritized remediation plan"
+---
+
+## The situation
+
+A private equity fund was three weeks away from closing the acquisition of a B2B software company for $120 million. The financial and legal due diligence process was complete. The investment team was confident in the numbers.
+
+Someone on the investment committee asked the right question late: what about the code?
+
+We were hired with one week of margin before closing. We asked for more time. We got three weeks.
+
+## What we found
+
+The target company's core system was 11 years old. 60% of the code had no tests. There were three different versions of the same billing module running simultaneously in production, with divergent logic that nobody knew exactly when it had diverged.
+
+The infrastructure was on a single cloud provider, with no documented disaster recovery. The engineering team had 18 people; 4 of them had been there for over 7 years and were the only ones who understood the most critical modules. There was no documentation for any of those modules.
+
+Integrations with the 40 largest clients were built on an internal API that the team had internally marked as "deprecated" two years prior, but which still represented 80% of revenue.
+
+<Callout>
+The risk wasn't in the bad code. It was in the concentration of knowledge in specific people and the dependency on an API nobody wanted to maintain but everyone depended on.
+</Callout>
+
+## The evaluation process
+
+We used a three-layer protocol:
+
+**Technical layer:** Static code analysis (coverage, cyclomatic complexity, quantified technical debt), architecture review, basic security audit, infrastructure and business continuity evaluation.
+
+**Team layer:** Structured interviews with the 8 key engineers to map knowledge concentration, historical turnover, and engineering culture. This is the layer most technical due diligence processes omit.
+
+**Business layer:** Cross-referencing identified technical debt with the product roadmap committed to clients. Which promised features can't be delivered with the current architecture without rewriting critical modules?
+
+## The recommendations
+
+We delivered a 47-page report with two sections: executive (8 pages, for the investment committee) and technical (39 pages, for the team that would operate the company post-acquisition).
+
+The executive section quantified the risk in dollars: $40M in estimated remediation cost in the first 18 months to bring the system to minimum safe operability standards. That didn't include the risk of key team turnover.
+
+The recommendation was clear: the deal could close, but not at $120M with the proposed structure.
+
+## The outcome
+
+The fund renegotiated the acquisition price and structured $15M of the payment as an earnout conditioned on meeting specific technical milestones from the remediation plan we delivered. The target company accepted.
+
+Three months after closing, the fund hired us to execute the first phase of the remediation plan.
+
+## What we learned
+
+Technical due diligence has a bad reputation because most of the time it's done poorly: a consultant spends two days looking at the code and delivers a traffic-light report with no business context. The real value is in connecting what you see in the code with what it means for the next owner's P&L. That requires understanding both technology and business operations.

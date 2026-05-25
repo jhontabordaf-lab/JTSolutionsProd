@@ -1,0 +1,59 @@
+---
+title: "Payment platform built for 10M monthly transactions"
+excerpt: "We redesigned from scratch the architecture of a Series A fintech startup that was weeks away from collapsing under its own growth."
+client: "Fintech startup (Series A, confidential)"
+industry: "Fintech"
+services: ["Development"]
+date: "2024-09"
+duration: "6 months"
+featured: true
+results:
+  - metric: "10M+"
+    label: "Monthly transactions"
+  - metric: "99.99%"
+    label: "Production uptime"
+  - metric: "40%"
+    label: "Infrastructure cost reduction"
+---
+
+## The starting point
+
+The startup had grown from 50,000 to 2 million users in 14 months. The original team of 4 engineers had built a Django monolith that worked perfectly at small scale. At 2 million users, it took 8 seconds to process a simple transaction.
+
+Series A investors had put $12M on the table. The CTO estimated that with the current architecture they had between 6 and 10 weeks before the system would start failing in an unrecoverable way.
+
+They called us on a Tuesday. The following Monday we had a team on-site.
+
+## The architecture decision
+
+The temptation in these cases is always the same: microservices. It's the answer that sounds modern, scalable, correct. It's also the answer that kills startups that don't have the team to operate it.
+
+After a week of analysis — code, infrastructure, team, product roadmap — we proposed a modular monolith instead of microservices. The reason: the startup's team had 6 engineers. Operating 20 microservices with 6 engineers is an operational debt that suffocates product velocity.
+
+The client questioned it. We presented the numbers. They agreed.
+
+## What we built
+
+We designed a system in three decoupled modules with well-defined contracts between them: transaction processing, account management, and notifications/reporting. Each module could scale independently without needing to be fully decoupled.
+
+The data layer moved from a PostgreSQL without indexes to an architecture with read replicas, Redis cache for frequent operations, and date-based partitioning on high-volume tables. Transaction processing time dropped from 8 seconds to 180 milliseconds at the 95th percentile.
+
+CI/CD went from manual deploys every two weeks to automated deploys multiple times per day, with automatic rollback and feature flags.
+
+<Callout>
+We chose the right architecture for the team that exists, not for the team we'd wish to have.
+</Callout>
+
+## The process
+
+We worked in two-week sprints with the internal team. We didn't replace the team: we worked alongside them, transferring knowledge in real time. By the end of the project, the startup's team could operate and extend the system without us.
+
+## The results
+
+Six months after the start, the platform was processing over 10 million monthly transactions with 99.99% uptime. Infrastructure cost dropped 40% compared to the original projection, because the architecture was more resource-efficient.
+
+The engineering team grew from 6 to 14 people in the following 4 months, with onboarding in days, not weeks, thanks to the documentation and modular architecture.
+
+## What we learned
+
+Full rewrites are rarely the right answer. In this case they were, because the original code had no tests, the technical debt was structural, and the original team was no longer there. But even so, the migration was gradual: module by module, with both systems running in parallel for 6 weeks before the final cutover.

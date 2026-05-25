@@ -24,7 +24,7 @@ export default async function TrabajoPage({
 }: {
   params: { locale: string };
 }) {
-  const casos = getAllCases();
+  const casos = getAllCases(locale);
   const t = await getTranslations({ locale, namespace: "trabajo" });
 
   return (
