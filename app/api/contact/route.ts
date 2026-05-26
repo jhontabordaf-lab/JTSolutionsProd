@@ -11,7 +11,7 @@ interface ContactPayload {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hola@jtsolutions.com";
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "info@jtsolutions.digital";
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "onboarding@resend.dev";
 
 export async function POST(request: Request) {
