@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: `JTSolutions Contacto <${FROM_EMAIL}>`,
       to: [TO_EMAIL],
-      replyTo: body.email,
+      reply_to: body.email,
       subject: `Nuevo mensaje de ${body.nombre}${body.empresa ? ` — ${body.empresa}` : ""}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;color:#0a0a0f">
@@ -86,7 +86,7 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("[Contact] Resend error:", error);
+      console.error("[Contact] Resend error:", JSON.stringify(error));
       return NextResponse.json(
         { error: "Error al enviar. Intenta de nuevo." },
         { status: 500 }
