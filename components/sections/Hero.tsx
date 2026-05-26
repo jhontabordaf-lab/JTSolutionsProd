@@ -169,7 +169,7 @@ export function Hero() {
   const line2 = useGlitchText(t("headline2"), glitchActive);
 
   const metrics = [
-    { value: "12+",  label: t("m1label") },
+    { value: "40+",  label: t("m1label") },
     { value: "4",    label: t("m2label") },
     { value: "100%", label: t("m3label") },
   ];
