@@ -222,8 +222,8 @@ export function ContactForm() {
       {status === "error" && (
         <p className="text-sm text-red-500 dark:text-red-400" role="alert">
           {t("errorGlobal")}{" "}
-          <a href="mailto:info@jtsolutions.digital" className="underline">
-            info@jtsolutions.digital
+          <a href="mailto:hola@jtsolutions.com" className="underline">
+            hola@jtsolutions.com
           </a>
           .
         </p>
