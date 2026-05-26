@@ -11,7 +11,7 @@ interface ContactPayload {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "jhon.taborda.f@gmail.com";
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hola@jtsolutions.com";
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "onboarding@resend.dev";
 
 export async function POST(request: Request) {
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: `JTSolutions Contacto <${FROM_EMAIL}>`,
       to: [TO_EMAIL],
-      reply_to: body.email,
+      replyTo: body.email,
       subject: `Nuevo mensaje de ${body.nombre}${body.empresa ? ` — ${body.empresa}` : ""}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;color:#0a0a0f">
@@ -86,19 +86,18 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("[Contact] Resend error:", JSON.stringify(error));
+      console.error("[Contact] Resend error:", error);
       return NextResponse.json(
-        { error: "Error al enviar. Intenta de nuevo.", _debug: error },
+        { error: "Error al enviar. Intenta de nuevo." },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error("[Contact] Unexpected error:", msg);
+    console.error("[Contact] Unexpected error:", err);
     return NextResponse.json(
-      { error: "Error interno. Intenta de nuevo.", _debug: msg },
+      { error: "Error interno. Intenta de nuevo." },
       { status: 500 }
     );
   }
