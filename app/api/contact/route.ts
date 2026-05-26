@@ -88,16 +88,17 @@ export async function POST(request: Request) {
     if (error) {
       console.error("[Contact] Resend error:", JSON.stringify(error));
       return NextResponse.json(
-        { error: "Error al enviar. Intenta de nuevo." },
+        { error: "Error al enviar. Intenta de nuevo.", _debug: error },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("[Contact] Unexpected error:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[Contact] Unexpected error:", msg);
     return NextResponse.json(
-      { error: "Error interno. Intenta de nuevo." },
+      { error: "Error interno. Intenta de nuevo.", _debug: msg },
       { status: 500 }
     );
   }
